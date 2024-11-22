@@ -42,6 +42,8 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/*.cpp")
 set(OLD_GLOB
   "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/build/Desktop-Debug/CMakeFiles/3.31.0/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/build/Desktop-Debug/DuniceDesktop_autogen/EWIEGA46WW/moc_mainwindow.cpp"
+  "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/build/Desktop-Debug/DuniceDesktop_autogen/mocs_compilation.cpp"
   "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/main.cpp"
   "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/mainwindow.cpp"
   )
@@ -62,6 +64,8 @@ endif()
 # _directory_contents at /usr/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/*.h")
 set(OLD_GLOB
+  "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/build/Desktop-Debug/DuniceDesktop_autogen/include/ui_mainwindow.h"
+  "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/build/Desktop-Debug/DuniceDesktop_autogen/moc_predefs.h"
   "/home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/mainwindow.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
