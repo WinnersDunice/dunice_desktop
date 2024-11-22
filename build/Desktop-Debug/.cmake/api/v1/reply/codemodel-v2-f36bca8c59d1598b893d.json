@@ -1,0 +1,70 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-547753114aa9a328443e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "DuniceDesktop",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "DuniceDesktop::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DuniceDesktop-Debug-058860b506e5120786d2.json",
+					"name" : "DuniceDesktop",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "DuniceDesktop_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DuniceDesktop_autogen-Debug-7e5f3c37b0d1b898d76d.json",
+					"name" : "DuniceDesktop_autogen",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/Skrever/hdd/\u0418\u041a\u0422\u0418\u0411/Cybergarden18/DuniceDesktop/build/Desktop-Debug",
+		"source" : "/home/Skrever/hdd/\u0418\u041a\u0422\u0418\u0411/Cybergarden18/DuniceDesktop"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
