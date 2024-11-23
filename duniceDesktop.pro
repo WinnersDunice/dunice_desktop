@@ -11,12 +11,14 @@ CONFIG += c++17
 SOURCES += \
     CheckApplications.cpp \
     CheckProcessor.cpp \
+    DataSender.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     CheckApplications.h \
     CheckProcessor.h \
+    DataSender.h \
     mainwindow.h
 
 FORMS += \
