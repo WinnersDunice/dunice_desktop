@@ -85,7 +85,7 @@ private:
     void GetSmbiosString(PSMBIOS_STRUCT_HEADER table, BYTE index, LPWSTR output, int cchOutput);
 
 public:
-    CheckProcessor();
+    CheckProcessor(){};
 
     //вывод значения числового параметра таблицы SMBIOS по указанному смещению
     QString BiosValue(DWORD type,DWORD offset, DWORD size);

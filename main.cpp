@@ -1,6 +1,7 @@
 //#include "mainwindow.h"
 #include "CheckProcessor.h"
 #include "CheckApplications.h"
+#include "DataSender.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -22,11 +23,17 @@ int main(int argc, char *argv[])
     CheckApplications Applications;
     std::vector<QString> out = Applications.GetListApps();
 
-    for(QString& str : out)
+    try
     {
-        qDebug() << str;
+
+    DataSender sender("https://dunicewinners.ru/user_info/" + ID.toStdString());
+    sender.sendData(out);
+
+    }
+    catch (QString& err)
+    {
+        qDebug() << err;
     }
 
-    qDebug() << ID;
     return app.exec();
 }

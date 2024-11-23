@@ -1,7 +1,5 @@
 #include "CheckProcessor.h"
 
-CheckProcessor::CheckProcessor() {}
-
 PRAW_SMBIOS_DATA CheckProcessor::GetSmbiosData()
 {
     DWORD bufferSize = 0;
