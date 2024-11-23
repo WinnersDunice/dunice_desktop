@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_DuniceDesktop_FILE /home/Skrever/hdd/ИКТИБ/Cybergarden18/DuniceDesktop/build/Desktop-Debug/DuniceDesktop)
-set(__QT_DEPLOY_TARGET_DuniceDesktop_TYPE EXECUTABLE)
