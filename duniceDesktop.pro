@@ -25,6 +25,7 @@ SOURCES += \
     CheckApplications.cpp \
     CheckProcessor.cpp \
     DataSender.cpp \
+    TrayOptions.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -32,6 +33,7 @@ HEADERS += \
     CheckApplications.h \
     CheckProcessor.h \
     DataSender.h \
+    TrayOptions.h \
     mainwindow.h
 
 FORMS += \
