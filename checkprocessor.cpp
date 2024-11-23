@@ -1,7 +1,8 @@
-#include "checkprocessor.h"
+#include "CheckProcessor.h"
 
+CheckProcessor::CheckProcessor() {}
 
-PRAW_SMBIOS_DATA GetSmbiosData()
+PRAW_SMBIOS_DATA CheckProcessor::GetSmbiosData()
 {
     DWORD bufferSize = 0;
 
@@ -19,7 +20,7 @@ PRAW_SMBIOS_DATA GetSmbiosData()
 
 
 
-PSMBIOS_STRUCT_HEADER GetNextStructure(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HEADER previous)
+PSMBIOS_STRUCT_HEADER CheckProcessor::GetNextStructure(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HEADER previous)
 {
     PSMBIOS_STRUCT_HEADER next = NULL;
     PBYTE c = NULL;
@@ -54,7 +55,7 @@ PSMBIOS_STRUCT_HEADER GetNextStructure(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HE
     return NULL;
 }
 
-PSMBIOS_STRUCT_HEADER GetNextStructureOfType(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HEADER previous, DWORD type)
+PSMBIOS_STRUCT_HEADER CheckProcessor::GetNextStructureOfType(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HEADER previous, DWORD type)
 {
     PSMBIOS_STRUCT_HEADER next = previous;
     while (NULL != (next = GetNextStructure(smbios,next))) {
@@ -65,7 +66,7 @@ PSMBIOS_STRUCT_HEADER GetNextStructureOfType(PRAW_SMBIOS_DATA smbios,PSMBIOS_STR
     return NULL;
 }
 
-PSMBIOS_STRUCT_HEADER GetStructureByHandle(PRAW_SMBIOS_DATA smbios,WORD handle)
+PSMBIOS_STRUCT_HEADER CheckProcessor::GetStructureByHandle(PRAW_SMBIOS_DATA smbios,WORD handle)
 {
     PSMBIOS_STRUCT_HEADER header = NULL;
 
@@ -76,7 +77,7 @@ PSMBIOS_STRUCT_HEADER GetStructureByHandle(PRAW_SMBIOS_DATA smbios,WORD handle)
     return NULL;
 }
 
-void GetSmbiosString(PSMBIOS_STRUCT_HEADER table, BYTE index, LPWSTR output, int cchOutput)
+void CheckProcessor::GetSmbiosString(PSMBIOS_STRUCT_HEADER table, BYTE index, LPWSTR output, int cchOutput)
 {
     DWORD i = 0;
     DWORD len = 0;
@@ -95,38 +96,54 @@ void GetSmbiosString(PSMBIOS_STRUCT_HEADER table, BYTE index, LPWSTR output, int
 }
 
 //вывод значения числового параметра таблицы SMBIOS по указанному смещению
-void PrintBiosValue(PRAW_SMBIOS_DATA smbios,DWORD type,DWORD offset, DWORD size)
+QString CheckProcessor::BiosValue(DWORD type,DWORD offset, DWORD size)
 {
+    PRAW_SMBIOS_DATA smbios = GetSmbiosData();
+
+    if(smbios == NULL) return QString("0");
+
     PSMBIOS_STRUCT_HEADER head=NULL;
     PBYTE cursor = NULL;
 
     head = GetNextStructureOfType(smbios,head, type);
-    if (NULL == head){ printf("PrintBiosValue Error!\n");return;}
+    if (NULL == head) return QString("0");
 
     cursor=((PBYTE)head+offset);
 
+    QString out("");
     //value
-    for(int i=0;i<size;i++) {
-        printf("%02x",(unsigned int) *cursor);
+    for(int i=0; i<size; i++) {
+        QString str = QString::number((unsigned int) *cursor, 16);
+
+        if(str.length() == 1)
+            str = "0" + str;
+
+        out += str;
         cursor++;
     }
-    printf("\n");
+    return out;
 }
 
 //вывод значения строкового параметра таблицы SMBIOS по указанному смещению
-void PrintBiosString(PRAW_SMBIOS_DATA smbios,DWORD type,DWORD offset)
+QString CheckProcessor::BiosString(DWORD type,DWORD offset)
 {
+    PRAW_SMBIOS_DATA smbios = GetSmbiosData();
+
+    if(smbios == NULL) return QString("0");
+
     PSMBIOS_STRUCT_HEADER head;
     head=NULL;
     PBYTE cursor = NULL;
     WCHAR buf[1024];
 
     head = GetNextStructureOfType(smbios,head, type);
-    if (NULL == head){printf("PrintString Error!\n");return;}
+    if (NULL == head) return QString("0");
     cursor=((PBYTE)head+offset);
     BYTE val=*cursor;
 
     GetSmbiosString((head), *cursor,buf,1024);
     //  value
-    wprintf(L"%s\n",buf);
+    QString out = QString::fromStdWString(buf);
+
+    return out;
 }

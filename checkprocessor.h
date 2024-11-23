@@ -5,6 +5,8 @@
 #include <Windows.h>
 #include <tchar.h>
 
+#include "QString"
+
 // SMBIOS Table Type numbers
 #define SMB_TABLE_BIOS              0
 #define SMB_TABLE_SYSTEM            1
@@ -80,14 +82,15 @@ private:
     PSMBIOS_STRUCT_HEADER GetNextStructure(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HEADER previous);
     PSMBIOS_STRUCT_HEADER GetNextStructureOfType(PRAW_SMBIOS_DATA smbios,PSMBIOS_STRUCT_HEADER previous, DWORD type);
     PSMBIOS_STRUCT_HEADER GetStructureByHandle(PRAW_SMBIOS_DATA smbios,WORD handle);
+    void GetSmbiosString(PSMBIOS_STRUCT_HEADER table, BYTE index, LPWSTR output, int cchOutput);
 
 public:
     CheckProcessor();
 
     //вывод значения числового параметра таблицы SMBIOS по указанному смещению
-    void GetSmbiosString(PSMBIOS_STRUCT_HEADER table, BYTE index, LPWSTR output, int cchOutput);
+    QString BiosValue(DWORD type,DWORD offset, DWORD size);
     //вывод значения строкового параметра таблицы SMBIOS по указанному смещению
-    void PrintBiosString(PRAW_SMBIOS_DATA smbios,DWORD type,DWORD offset);
+    QString BiosString(DWORD type,DWORD offset);
 };
 
 #endif // CHECKPROCESSOR_H
