@@ -1,26 +1,48 @@
 // TrayOptions.cpp
+
+
 #include "TrayOptions.h"
 
 TrayOptions::TrayOptions(QWidget *parent) : QWidget(parent)
 {
     // Устанавливаем иконку для системного трея
-    trayIcon = new QSystemTrayIcon(this);
-    trayIcon->setIcon(QIcon("C:/Users/Skrever/Documents/CyberGarden18/duniceDesktop/icons/icon.png"));
+    _trayIcon = new QSystemTrayIcon(this);
+    _trayIcon->setIcon(QIcon(":/icons/icons/icon.png"));
 
     // Создаем меню для трея
-    QMenu *trayMenu = new QMenu(this);
-    QAction *openAction = new QAction("Are u wining son?", this);
+    _trayMenu = new QMenu(this);
+    _openAction = new QAction("Выключить отправку информации", this);
     // QAction *exitAction = new QAction("Выход", this);
 
     // Подключаем действия
-    connect(openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
-    // connect(exitAction, &QAction::triggered, qApp, &QApplication::quit);
+    connect(_openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
 
-    trayMenu->addAction(openAction);
-    // trayMenu->addAction(exitAction);
+    _trayMenu->addAction(_openAction);
 
-    trayIcon->setContextMenu(trayMenu);
+    _trayIcon->setContextMenu(_trayMenu);
 
     // Показываем иконку в системном трее
-    trayIcon->show();
+    _trayIcon->show();
+}
+
+void TrayOptions::SetSendApps()
+{
+    if(_sendDataOff)
+    {
+        _sendDataOff = false;
+        if(_openAction != nullptr) delete _openAction;
+        _openAction = new QAction("Выключить отправку информации", this);
+        connect(_openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
+        qDebug() << "ON";
+        _trayMenu->addAction(_openAction);
+    }
+    else
+    {
+        _sendDataOff = true;
+        if(_openAction != nullptr) delete _openAction;
+        qDebug() << "OFF";
+        _openAction = new QAction("Включить отправку информации", this);
+        connect(_openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
+        _trayMenu->addAction(_openAction);
+    }
 }

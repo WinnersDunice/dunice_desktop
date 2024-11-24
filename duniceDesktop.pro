@@ -47,6 +47,9 @@ CONFIG += embed_translations
 
 QT += core network gui widgets
 
+# Указываем ресурсы
+RESOURCES += resources.qrc
+
 # Правила для развертывания
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

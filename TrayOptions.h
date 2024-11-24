@@ -14,19 +14,22 @@ class TrayOptions : public QWidget
 {
 
 private:
-    QSystemTrayIcon* trayIcon;
+    QSystemTrayIcon* _trayIcon;
+
+    bool _sendDataOff = false; //Отключил ли пользователь отправку сообщений о запущенных приложениях
+    QAction* _openAction; // Ссылка на переключатель
+    QMenu* _trayMenu; // Ссылка на меню
+
     Q_OBJECT
 
 private slots:
-    void SetSendApps()
-    {
-        qDebug() << "penis.";
-    }
+    void SetSendApps();
 public:
-    //explicit TrayOptions(QWidget *parent = nullptr);
-    explicit TrayOptions(QWidget *parent = nullptr);
 
-//signals:
+    explicit TrayOptions(QWidget *parent = nullptr);
+    bool canSendAppsName(){return !_sendDataOff;};
+
+
 };
 
 #endif // TRAYOPTIONS_H

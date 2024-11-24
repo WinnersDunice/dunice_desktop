@@ -31,7 +31,6 @@ void DataSender::sendData(std::vector<QString> data)
 void DataSender::sendJsonToServerWithResponse(const std::string& jsonStr)
 {
     if(_url == "") throw QString("URL NOT DECLARED!!!");
-    qDebug() << "JSON: " << jsonStr + "   URL: " + _url;
     CURL* curl = curl_easy_init();
     if (curl) {
         CURLcode res;
