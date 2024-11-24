@@ -24,8 +24,9 @@ private:
 
 private slots:
     void SetSendApps();
-public:
+    void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
+public:
     explicit TrayOptions(QWidget *parent = nullptr);
     bool canSendAppsName(){return !_sendDataOff;};
 

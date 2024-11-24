@@ -1,10 +1,11 @@
 //#include "mainwindow.h"
-#define SLEEP 2000
+#define SLEEP 10000
 
 #include "CheckProcessor.h"
 #include "CheckApplications.h"
 #include "DataSender.h"
 #include "TrayOptions.h"
+#include "Autorun.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -21,16 +22,23 @@ void addToStartup();
 
 int main(int argc, char *argv[])
 {
-    addToStartup();
 
     QApplication app(argc, argv);
+
+
+    //Если не в автозапуске, то ставим на автозапуск
+    if(!Autorun::isAutoRunEnabled())
+        Autorun::setAutoRun(true);
+    else
+        qDebug() << "App is autostart now!";
+
     TrayOptions Tray;
     QString ID;
     CheckProcessor procCheck;
 
     ID = procCheck.BiosValue(2, 8, 8);
 
-    DataSender sender("https://dunicewinners.ru/user_info/" + ID.toStdString());
+    DataSender sender("https://api.dunicewinners.ru/user_info/" + ID.toStdString());
 
     QTimer timer;
 
@@ -67,21 +75,4 @@ void sendData(DataSender& sender, TrayOptions& Tray)
             qDebug() << err;
         }
     }
-}
-
-void addToStartup()
-{
-    // Путь к исполняемому файлу
-    QString appPath = QDir::toNativeSeparators(QCoreApplication::applicationFilePath());
-
-    // Путь к ключу реестра для автозапуска
-    QSettings settings("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
-
-    // Устанавливаем имя программы и путь
-    settings.setValue("duniceDesktop", "\"" + appPath + "\"");
-
-    if (settings.status() == QSettings::NoError)
-        qDebug() << "Программа успешно добавлена в автозапуск.";
-    else
-        qDebug() << "Ошибка при добавлении программы в автозапуск.";
 }

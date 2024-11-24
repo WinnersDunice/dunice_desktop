@@ -7,42 +7,44 @@ TrayOptions::TrayOptions(QWidget *parent) : QWidget(parent)
 {
     // Устанавливаем иконку для системного трея
     _trayIcon = new QSystemTrayIcon(this);
-    _trayIcon->setIcon(QIcon(":/icons/icons/icon.png"));
+    _trayIcon->setIcon(QIcon(":/icons/icons/IBSon.png"));
 
     // Создаем меню для трея
     _trayMenu = new QMenu(this);
-    _openAction = new QAction("Выключить отправку информации", this);
     // QAction *exitAction = new QAction("Выход", this);
 
-    // Подключаем действия
-    connect(_openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
-
-    _trayMenu->addAction(_openAction);
-
     _trayIcon->setContextMenu(_trayMenu);
+    // Подключаем действия
+    connect(_trayIcon, &QSystemTrayIcon::activated, this, &TrayOptions::onTrayIconActivated);
 
     // Показываем иконку в системном трее
     _trayIcon->show();
 }
 
+void TrayOptions::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason)
+    {
+    case QSystemTrayIcon::Trigger:  // Левый клик
+        SetSendApps();
+    default:
+        break;
+    }
+}
+
+
 void TrayOptions::SetSendApps()
 {
     if(_sendDataOff)
     {
+        _trayIcon->setIcon(QIcon(":/icons/icons/IBSon.png"));
         _sendDataOff = false;
-        if(_openAction != nullptr) delete _openAction;
-        _openAction = new QAction("Выключить отправку информации", this);
-        connect(_openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
         qDebug() << "ON";
-        _trayMenu->addAction(_openAction);
     }
     else
     {
+        _trayIcon->setIcon(QIcon(":/icons/icons/IBSoff.png"));
         _sendDataOff = true;
-        if(_openAction != nullptr) delete _openAction;
         qDebug() << "OFF";
-        _openAction = new QAction("Включить отправку информации", this);
-        connect(_openAction, &QAction::triggered, this, &TrayOptions::SetSendApps);
-        _trayMenu->addAction(_openAction);
     }
 }

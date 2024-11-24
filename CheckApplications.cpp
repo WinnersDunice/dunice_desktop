@@ -29,7 +29,10 @@ std::vector<QString> CheckApplications::GetListApps()
         if(temp.toUpper() != "TEXTINPUTHOST.EXE" \
             && temp.toUpper() != "SYSTEMSETTINGS.EXE" && temp.toUpper() != "CORTANA.EXE" \
                     && temp.toUpper() != "APPLICATIONFRAMEHOST.EXE" && temp.toUpper() != "EXPLORER.EXE")
+        {
+            temp.truncate(temp.length() - 4);
             output.insert(temp);
+        }
     }
     return std::vector<QString>(output.begin(), output.end());
 }

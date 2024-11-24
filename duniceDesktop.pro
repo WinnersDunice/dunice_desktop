@@ -30,6 +30,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Autorun.h \
     CheckApplications.h \
     CheckProcessor.h \
     DataSender.h \
