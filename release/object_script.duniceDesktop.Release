@@ -1,0 +1,10 @@
+release/CheckApplications.o
+release/CheckProcessor.o
+release/DataSender.o
+release/TrayOptions.o
+release/main.o
+release/mainwindow.o
+release/qrc_resources.o
+release/qrc_qmake_qmake_qm_files.o
+release/moc_TrayOptions.o
+release/moc_mainwindow.o
